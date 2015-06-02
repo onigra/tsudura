@@ -1,0 +1,23 @@
+require File.expand_path(File.join('../', 'spec_helper'), File.dirname(__FILE__))
+
+describe Fukusa::ConfigParser do
+  describe "#attributes" do
+    context "sample1" do
+      let(:config_obj) { described_class.new("#{APP_ROOT}/spec/samples/yamls/sample1.yml") }
+
+      it do
+        expect(config_obj.attributes).to match(
+          service: "fukusa",
+          environment: "staging",
+          region: "ap-northeast-1",
+          security_group_id: "sg-aad34bcf",
+          subnet_id: "subnet-cd985794",
+          image_id: "ami-cbf90ecb",
+          key_name: "fukusa_staging",
+          playbook_path: "fukusa/staging.yml",
+          instance_type: "t2.micro"
+        )
+      end
+    end
+  end
+end
