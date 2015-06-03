@@ -17,6 +17,7 @@ require "fukusa/aws/launch_instance"
 require "fukusa/provisioner/ansible"
 
 require "fukusa/config_parser"
+require "fukusa/env_prefix"
 require "fukusa/runner"
 require "fukusa/cli"
 
