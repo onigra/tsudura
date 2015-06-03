@@ -1,5 +1,6 @@
 module Fukusa::Aws
   class LaunchConfig
+    include Utils
   
     def initialize(image_id, config, timestamp)
       @image_id = image_id
@@ -14,7 +15,7 @@ module Fukusa::Aws
         user_data: Base64.encode64(user_data_script),
         instance_type: @config[:instance_type],
         security_groups: [@config[:security_group_id]],
-        launch_configuration_name: "#{@config[:service]}-#{@config[:environment]}-#{@timestamp}",
+        launch_configuration_name: "#{@config[:service]}-#{short_env}-#{@timestamp}",
       )
     end
 

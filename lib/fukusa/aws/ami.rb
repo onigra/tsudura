@@ -1,5 +1,6 @@
 module Fukusa::Aws
   class Ami
+    include Utils
   
     def initialize(instance_id, config, timestamp)
       @instance_id = instance_id
@@ -30,7 +31,7 @@ module Fukusa::Aws
     private
 
     def create_ami
-      result = ec2.create_image(name: "#{@config[:service]}-#{@config[:environment]}-#{@timestamp}", instance_id: @instance_id)
+      result = ec2.create_image(name: "#{@config[:service]}-#{short_env}-#{@timestamp}", instance_id: @instance_id)
       result[:image_id]
     end
   
