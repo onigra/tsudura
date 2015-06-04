@@ -1,7 +1,8 @@
 module Fukusa
   class ConfigParser
     def initialize(yml)
-      @config = YAML.load_file(yml)
+      require "erb"
+      @config = YAML.load(ERB.new(File.read(yml)).result)
     end
 
     def attributes

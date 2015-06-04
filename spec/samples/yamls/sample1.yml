@@ -7,6 +7,7 @@ image_id: ami-cbf90ecb
 key_name: fukusa_staging
 playbook_path: "spec/samples/ansible_playbook/staging.yml"
 inventory_file: "~/.ansible/ec2.py"
-vault_password: fukusa
+vault_password: <%= ENV["VAULT_PASSWORD"] %>
 instance_type: t2.micro
 user_data_script: "#!/bin/bash -ex\nsu - deploy /home/deploy/startup.sh staging"
+owner: <%= ENV["OWNER"] %>
