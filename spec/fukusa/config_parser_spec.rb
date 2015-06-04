@@ -15,7 +15,9 @@ describe Fukusa::ConfigParser do
           image_id: "ami-cbf90ecb",
           key_name: "fukusa_staging",
           playbook_path: "fukusa/staging.yml",
-          instance_type: "t2.micro"
+          instance_type: "t2.micro",
+          inventory_file: "~/.ansible/ec2.py",
+          vault_password: "fukusa",
         )
       end
     end
