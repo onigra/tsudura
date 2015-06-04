@@ -1,6 +1,8 @@
+require_relative "./utils"
+
 module Fukusa::Aws
   class Ami
-    include Utils
+    include Fukusa::Aws::Utils
   
     def initialize(instance_id, config, timestamp)
       @instance_id = instance_id

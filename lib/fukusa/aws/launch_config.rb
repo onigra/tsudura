@@ -1,6 +1,8 @@
+require_relative "./utils"
+
 module Fukusa::Aws
   class LaunchConfig
-    include Utils
+    include Fukusa::Aws::Utils
   
     def initialize(image_id, config, timestamp)
       @image_id = image_id
