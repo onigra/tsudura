@@ -6,4 +6,6 @@ subnet_id: subnet-cd985794
 image_id: ami-cbf90ecb
 key_name: fukusa_staging
 playbook_path: "fukusa/staging.yml"
+inventory_file: "~/.ansible/ec2.py"
+vault_password: fukusa
 instance_type: t2.micro
