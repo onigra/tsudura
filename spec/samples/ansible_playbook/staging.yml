@@ -1,0 +1,9 @@
+---
+- hosts:
+  - tag_Name_fukusa-ami
+  sudo: yes
+  vars_files:
+    - vault_var.yml
+  roles:
+    - roles/httpd
+    - roles/set_decrypted_vault_file
