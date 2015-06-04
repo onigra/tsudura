@@ -14,10 +14,11 @@ describe Fukusa::ConfigParser do
           subnet_id: "subnet-cd985794",
           image_id: "ami-cbf90ecb",
           key_name: "fukusa_staging",
-          playbook_path: "fukusa/staging.yml",
+          playbook_path: "spec/samples/ansible_playbook/staging.yml",
           instance_type: "t2.micro",
           inventory_file: "~/.ansible/ec2.py",
           vault_password: "fukusa",
+          user_data_script: "#!/bin/bash -ex\nsu - deploy /home/deploy/startup.sh staging",
         )
       end
     end
