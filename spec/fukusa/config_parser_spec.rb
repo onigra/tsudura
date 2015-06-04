@@ -15,7 +15,7 @@ describe Fukusa::ConfigParser do
           service: "fukusa",
           environment: "staging",
           region: "ap-northeast-1",
-          security_group_id: "sg-dc3ca4b9",
+          security_group_id: "sg-903ca4f5",
           subnet_id: "subnet-cd985794",
           image_id: "ami-cbf90ecb",
           key_name: "fukusa_staging",
