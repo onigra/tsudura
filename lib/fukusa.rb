@@ -13,6 +13,7 @@ require "fukusa/aws/ami"
 require "fukusa/aws/auto_scale"
 require "fukusa/aws/launch_config"
 require "fukusa/aws/launch_instance"
+require "fukusa/aws/utils"
 
 require "fukusa/provisioner/ansible"
 
