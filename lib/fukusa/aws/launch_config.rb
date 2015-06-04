@@ -14,7 +14,7 @@ module Fukusa::Aws
       @new_launch_config = autoscaling.create_launch_configuration(
         image_id: @image_id,
         key_name: @config[:key_name],
-        user_data: Base64.encode64(user_data_script),
+        user_data: Base64.encode64(@config[:user_data_script]),
         instance_type: @config[:instance_type],
         security_groups: [@config[:security_group_id]],
         launch_configuration_name: "#{@config[:service]}-#{short_env}-#{@timestamp}",
@@ -37,13 +37,6 @@ module Fukusa::Aws
   
     private
   
-    def user_data_script
-      <<-EOS
-#!/bin/bash -ex
-su - deploy /home/deploy/startup.sh #{@config[:environment]}
-      EOS
-    end
-
     def autoscaling
       @autoscaling ||= ::Aws::AutoScaling::Client.new(region: @config[:region])
     end
