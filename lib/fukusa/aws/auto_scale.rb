@@ -1,6 +1,8 @@
+require_relative "./utils"
+
 module Fukusa::Aws
   class AutoScale
-    include Utils
+    include Fukusa::Aws::Utils
 
     def initialize(config, timestamp)
       @config = config
