@@ -19,7 +19,7 @@ module Fukusa::Aws
     end
 
     def describe_service_images 
-      ec2.describe_images(owners: ["#{@config[:owner]}"], filters: [ { name: "name", values: ["#{@config[:service]}*"] }])
+      ec2.describe_images(owners: ["#{@config[:owner]}"], filters: [ { name: "name", values: ["#{@config[:service]}-#{short_env}*"] }])
     end
 
     def get_old_image(images)

@@ -27,7 +27,7 @@ module Fukusa::Aws
       tmp = []
 
       autoscaling.describe_launch_configurations.each_page do |i|
-        tmp << i.launch_configurations.select { |item| item.launch_configuration_name =~ /#{@config[:service]}/ }
+        tmp << i.launch_configurations.select { |item| item.launch_configuration_name =~ /#{@config[:service]}-#{short_env}/ }
       end
   
       tmp.flatten.reject { |obj| obj.launch_configuration_name == @new_launch_config }.map(&:launch_configuration_name).first
