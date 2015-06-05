@@ -1,10 +1,12 @@
 [![Build Status](https://travis-ci.org/onigra/tsudura.svg)](https://travis-ci.org/onigra/tsudura)
 
+# WARNING
+
+This gem is alpha version.
+
 # Tsudura
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tsudura`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-WARNING: This gem is alpha version.
 
 ## Installation
 
