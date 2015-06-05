@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["onigra"]
   spec.email         = ["3280467rec@gmail.com"]
 
-  spec.summary       = %q{Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
+  spec.summary       = %q{Update ami and launch_config and auto scaling group like packer.}
+  spec.description   = %q{Command line tool of create new ami and update auto scaling group and delete old ami and launch config.}
   spec.homepage      = "https://github.com/onigra/tsudura"
   spec.license       = "MIT"
 
