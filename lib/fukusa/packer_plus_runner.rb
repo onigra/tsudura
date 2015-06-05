@@ -1,4 +1,4 @@
-module Fuksa
+module Fukusa
   class PackerPlusRunner
     include Fukusa::RunnerModule
 

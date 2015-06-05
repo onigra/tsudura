@@ -1,4 +1,4 @@
-module Fuksa
+module Fukusa
   class NormalRunner
     include Fukusa::RunnerModule
 
