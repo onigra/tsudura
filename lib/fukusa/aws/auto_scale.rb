@@ -1,5 +1,3 @@
-require_relative "utils"
-
 module Fukusa::Aws
   class AutoScale
     include Fukusa::Aws::Utils
