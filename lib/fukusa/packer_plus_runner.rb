@@ -1,6 +1,6 @@
 module Fuksa
   class PackerPlusRunner
-    include RunnerModule
+    include Fukusa::RunnerModule
 
     def initialize(config)
       @config = config
