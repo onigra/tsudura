@@ -1,4 +1,4 @@
-module Fukusa::Provisioner
+module Tsudura::Provisioner
   class Ansible
     def initialize(config)
       @config = config

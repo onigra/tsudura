@@ -1,6 +1,6 @@
 require File.expand_path(File.join('../', 'spec_helper'), File.dirname(__FILE__))
 
-describe Fukusa::ConfigParser do
+describe Tsudura::ConfigParser do
   describe "#attributes" do
     context "normal mode" do
       before do
@@ -12,7 +12,7 @@ describe Fukusa::ConfigParser do
 
       it do
         expect(config_obj.attributes).to match(
-          service: "fukusa",
+          service: "tsudura",
           environment: "staging",
           region: "ap-northeast-1",
           security_group_id: "sg-903ca4f5",

@@ -1,10 +1,10 @@
 require File.expand_path(File.join('../..', 'spec_helper'), File.dirname(__FILE__))
 
-describe "Fukusa::Aws::Utils" do
+describe "Tsudura::Aws::Utils" do
   describe ".short" do
     before do
       @obj = Class.new
-      @obj.extend Fukusa::Aws::Utils
+      @obj.extend Tsudura::Aws::Utils
     end
 
     context "production" do

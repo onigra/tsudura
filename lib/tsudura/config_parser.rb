@@ -1,4 +1,4 @@
-module Fukusa
+module Tsudura
   class ConfigParser
     def initialize(yml)
       require "erb"

@@ -1,6 +1,6 @@
-module Fukusa::Aws
+module Tsudura::Aws
   class Ami
-    include Fukusa::Aws::Utils
+    include Tsudura::Aws::Utils
   
     def initialize(instance_id, config, timestamp)
       @instance_id = instance_id

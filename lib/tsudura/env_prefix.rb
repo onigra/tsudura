@@ -1,4 +1,4 @@
-module Fukusa
+module Tsudura
   class EnvPrefix
     def self.short(env)
       case env

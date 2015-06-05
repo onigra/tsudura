@@ -1,6 +1,6 @@
-module Fukusa::Aws
+module Tsudura::Aws
   class LaunchConfig
-    include Fukusa::Aws::Utils
+    include Tsudura::Aws::Utils
   
     def initialize(image_id, config, timestamp)
       @image_id = image_id

@@ -1,6 +1,6 @@
-module Fukusa::Aws
+module Tsudura::Aws
   class AutoScale
-    include Fukusa::Aws::Utils
+    include Tsudura::Aws::Utils
 
     def initialize(config, timestamp)
       @config = config

@@ -1,4 +1,4 @@
-service: fukusa
+service: tsudura
 environment: staging
 region: ap-northeast-1
 security_group_id: sg-903ca4f5

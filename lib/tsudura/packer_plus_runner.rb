@@ -1,6 +1,6 @@
-module Fukusa
-  class NormalRunner
-    include Fukusa::RunnerModule
+module Tsudura
+  class PackerPlusRunner
+    include Tsudura::RunnerModule
 
     def initialize(config)
       @config = config
@@ -12,8 +12,7 @@ module Fukusa
       provision
       new_image_id = create_ami(instance_id)
       create_launch_config(new_image_id)
-      update_auto_scaling_group
-      destroy_temp_objects
+      terminate_tmp_ec2_instance
     end
   end
 end

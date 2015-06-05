@@ -1,4 +1,4 @@
-module Fukusa::Aws
+module Tsudura::Aws
   class LaunchInstance
   
     def initialize(config)
