@@ -29,13 +29,13 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3"
-  spec.add_development_dependency "guard", "~> 2"
-  spec.add_development_dependency "guard-rspec", "~> 4"
-  spec.add_development_dependency "growl", "~> 1"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "guard"
+  spec.add_development_dependency "guard-rspec"
+  spec.add_development_dependency "growl"
+  spec.add_development_dependency "awesome_print"
 
-  spec.add_dependency "thor", "~> 0.19"
-  spec.add_dependency "awesome_print", "~> 1"
+  spec.add_dependency "thor"
   spec.add_dependency "aws-sdk", '~> 2'
-  spec.add_dependency "activesupport", "~> 4"
+  spec.add_dependency "deep_hash_transform"
 end
