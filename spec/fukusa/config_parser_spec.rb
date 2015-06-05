@@ -2,13 +2,13 @@ require File.expand_path(File.join('../', 'spec_helper'), File.dirname(__FILE__)
 
 describe Fukusa::ConfigParser do
   describe "#attributes" do
-    context "sample1" do
+    context "normal mode" do
       before do
         ENV["VAULT_PASSWORD"] = "password"
         ENV["OWNER"] = "99999999"
       end
 
-      let(:config_obj) { described_class.new("#{APP_ROOT}/spec/samples/yamls/sample1.yml") }
+      let(:config_obj) { described_class.new("#{APP_ROOT}/spec/samples/yamls/normal.yml") }
 
       it do
         expect(config_obj.attributes).to match(
