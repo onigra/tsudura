@@ -6,11 +6,10 @@ module Tsudura::Aws
     end
   
     def launch
-      instance_result = launch_ec2
-      instance = instance_result[:instances].first
-      waiting_for_launch instance
-      ec2.create_tags(resources: [instance.instance_id], tags: [ { key: 'Name', value: "#{@config[:service]}-ami"}])
-      @launched_instance_id = instance.instance_id
+      launch_result = launch_ec2
+      @launched_instance_id = launch_result[:instances].first.instance_id
+      waiting_for_launch
+      create_tag
       @launched_instance_id
     end
   
@@ -19,27 +18,11 @@ module Tsudura::Aws
     end
   
     private
-  
-    #
-    # statusがreadyになるまで待ち
-    #
-    def waiting_for_launch(instance)
-      status = nil
-  
-      while (status.nil? || status == 'initializing')
-        sleep 10
-  
-        statuses = ec2.describe_instance_status(instance_ids: [instance.instance_id])
-        if statuses[:instance_statuses] == []
-          #  早過ぎると、ステータス取得すらできない
-          next
-        end
-  
-        status = statuses[:instance_statuses].first[:system_status].status
-        puts status
-      end
+
+    def ec2
+      @ec2 ||= ::Aws::EC2::Client.new(region: @config[:region])
     end
-  
+
     def launch_ec2
       ec2.run_instances(
         min_count: 1,
@@ -52,8 +35,24 @@ module Tsudura::Aws
       )
     end
 
-    def ec2
-      @ec2 ||= ::Aws::EC2::Client.new(region: @config[:region])
+    def waiting_for_launch
+      status = nil
+
+      while (status.nil? || status == 'initializing')
+        sleep 10
+        statuses = ec2.describe_instance_status(instance_ids: [@launched_instance_id])
+
+        # 早すぎるとステータスの取得すらできない
+        if statuses[:instance_statuses] == []
+          next
+        end
+
+        status = statuses[:instance_statuses].first[:system_status].status
+      end
+    end
+
+    def create_tag
+      ec2.create_tags(resources: [@launched_instance_id], tags: [ { key: 'Name', value: "#{@config[:service]}-ami"}])
     end
   end
 end
