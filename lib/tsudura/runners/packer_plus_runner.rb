@@ -1,6 +1,6 @@
-module Tsudura
+module Tsudura::Runners
   class PackerPlusRunner
-    include Tsudura::RunnerModule
+    include Tsudura::Runners::RunnerModule
 
     def initialize(config)
       @config = config
