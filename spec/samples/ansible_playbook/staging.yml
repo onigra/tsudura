@@ -1,6 +1,6 @@
 ---
 - hosts:
-  - tag_Name_fukusa-ami
+  - tag_Name_tsudura-ami
   sudo: yes
   vars_files:
     - vault_var.yml
