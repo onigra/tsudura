@@ -1,6 +1,6 @@
-module Tsudura
+module Tsudura::Runners
   class NormalRunner
-    include Tsudura::RunnerModule
+    include Tsudura::Runners::RunnerModule
 
     def initialize(config)
       @config = config
