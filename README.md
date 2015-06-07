@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/onigra/tsudura.svg)](https://travis-ci.org/onigra/tsudura)
+[![Build Status](https://travis-ci.org/onigra/tsudura.svg)](https://travis-ci.org/onigra/tsudura) [![Coverage Status](https://coveralls.io/repos/onigra/tsudura/badge.svg?branch=master)](https://coveralls.io/r/onigra/tsudura?branch=master) [![Code Climate](https://codeclimate.com/github/onigra/tsudura/badges/gpa.svg)](https://codeclimate.com/github/onigra/tsudura)
 
 # WARNING
 
