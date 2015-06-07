@@ -9,6 +9,7 @@ require "deep_hash_transform"
 
 require "tsudura/config_parser"
 require "tsudura/env_prefix"
+require "tsudura/progress_bar"
 require "tsudura/runners/runner_module"
 require "tsudura/runners/normal_runner"
 require "tsudura/runners/packer_runner"
