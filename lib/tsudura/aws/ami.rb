@@ -40,10 +40,12 @@ module Tsudura::Aws
     #
     def waiting_for_available
       status = nil
+      progress = Tsudura::ProgressBar.new
   
       while (status.nil? || status == 'pending')
         sleep 10
         status = ec2.describe_images(image_ids: [@new_image_id])[:images].first.state
+        progress.write
       end
     end
 
