@@ -10,7 +10,7 @@ module Tsudura::Aws
   
     def create
       @new_image_id = create_ami
-      waiting_for_available @new_image_id
+      waiting_for_available
       @new_image_id
     end
      
@@ -38,12 +38,12 @@ module Tsudura::Aws
     #
     # stateがavailableになるまで待ち
     #
-    def waiting_for_available(new_image_id)
+    def waiting_for_available
       status = nil
   
       while (status.nil? || status == 'pending')
         sleep 10
-        status = ec2.describe_images(image_ids: [new_image_id])[:images].first.state
+        status = ec2.describe_images(image_ids: [@new_image_id])[:images].first.state
       end
     end
 
