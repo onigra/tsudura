@@ -37,6 +37,7 @@ module Tsudura::Aws
 
     def waiting_for_launch
       status = nil
+      progress = Tsudura::ProgressBar.new
 
       while (status.nil? || status == 'initializing')
         sleep 10
@@ -48,6 +49,7 @@ module Tsudura::Aws
         end
 
         status = statuses[:instance_statuses].first[:system_status].status
+        progress.write
       end
     end
 
