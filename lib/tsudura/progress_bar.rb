@@ -6,7 +6,7 @@ module Tsudura
 
     def write
       @num += 1
-      print "working...#{'.' * @num}\r"
+      print "\rWorking...#{'.' * @num}"
       STDOUT.flush
     end
   end
