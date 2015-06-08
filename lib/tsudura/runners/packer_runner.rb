@@ -8,9 +8,9 @@ module Tsudura::Runners
     end
 
     def run
-      instance_id = launch_instance
+      launch_instance
       provision
-      puts create_ami(instance_id)
+      create_ami
       terminate_tmp_ec2_instance
     end
   end

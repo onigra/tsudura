@@ -8,12 +8,13 @@ module Tsudura::Runners
     end
 
     def run
-      instance_id = launch_instance
+      launch_instance
       provision
-      new_image_id = create_ami(instance_id)
-      create_launch_config(new_image_id)
+      create_ami
+      create_launch_config
       update_auto_scaling_group
       destroy_temp_objects
+      puts "Success!!"
     end
   end
 end

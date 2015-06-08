@@ -8,11 +8,12 @@ module Tsudura::Runners
     end
 
     def run
-      instance_id = launch_instance
+      launch_instance
       provision
-      new_image_id = create_ami(instance_id)
-      create_launch_config(new_image_id)
+      create_ami
+      create_launch_config
       terminate_tmp_ec2_instance
+      puts "Success!!"
     end
   end
 end
