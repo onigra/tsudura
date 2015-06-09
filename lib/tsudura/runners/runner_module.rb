@@ -5,20 +5,20 @@ module Tsudura::Runners
   
     def launch_instance
       @ec2 = Tsudura::Aws::LaunchInstance.new(@config)
-      @ec2.launch
+      @tmp_instance_id = @ec2.launch
     end
   
     def provision
       Tsudura::Provisioner::Ansible.new(@config).provision!
     end
   
-    def create_ami(instance_id)
-      @ami = Tsudura::Aws::Ami.new(instance_id, @config, @timestamp)
-      @ami.create
+    def create_ami
+      @ami = Tsudura::Aws::Ami.new(@tmp_instance_id, @config, @timestamp)
+      @new_image_id = @ami.create
     end
   
-    def create_launch_config(new_image_id)
-      @launch_config = Tsudura::Aws::LaunchConfig.new(new_image_id, @config, @timestamp)
+    def create_launch_config
+      @launch_config = Tsudura::Aws::LaunchConfig.new(@new_image_id, @config, @timestamp)
       @launch_config.create
     end
     
@@ -27,9 +27,9 @@ module Tsudura::Runners
     end
   
     def destroy_temp_objects
-      @ec2.terminate
-      @ami.deregister
-      @launch_config.delete
+      terminate_tmp_ec2_instance
+      deregister_old_ami
+      delete_old_launch_config
     end
     
     def terminate_tmp_ec2_instance

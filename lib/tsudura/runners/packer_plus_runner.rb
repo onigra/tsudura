@@ -1,6 +1,7 @@
 module Tsudura::Runners
   class PackerPlusRunner
     include Tsudura::Runners::RunnerModule
+    include Tsudura::Runners::RunnerModuleWithMessage
 
     def initialize(config)
       @config = config
@@ -8,11 +9,12 @@ module Tsudura::Runners
     end
 
     def run
-      instance_id = launch_instance
-      provision
-      new_image_id = create_ami(instance_id)
-      create_launch_config(new_image_id)
-      terminate_tmp_ec2_instance
+      launch_instance_with_m
+      provision_with_m
+      create_ami_with_m
+      create_launch_config_with_m
+      terminate_tmp_ec2_instance_with_m
+      puts "Success!!"
     end
   end
 end
