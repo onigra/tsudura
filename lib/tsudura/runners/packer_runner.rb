@@ -9,10 +9,11 @@ module Tsudura::Runners
     end
 
     def run
-      launch_instance
-      provision
-      create_ami
-      terminate_tmp_ec2_instance
+      launch_instance_with_m
+      provision_with_m
+      create_ami_with_m
+      terminate_tmp_ec2_instance_with_m
+      puts "Success!!"
     end
   end
 end
