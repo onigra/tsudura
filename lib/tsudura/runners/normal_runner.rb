@@ -1,6 +1,7 @@
 module Tsudura::Runners
   class NormalRunner
     include Tsudura::Runners::RunnerModule
+    include Tsudura::Runners::RunnerModuleWithMessage
 
     def initialize(config)
       @config = config
