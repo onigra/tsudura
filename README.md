@@ -3,10 +3,12 @@
 # WARNING
 
 This gem is alpha version.
+このgemはまだアルファ版です。
 
 # Tsudura
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tsudura`. To experiment with that code, run `bin/console` for an interactive prompt.
+Yamlに記述した設定を元にAnsible Playbookをsshで実行し、AWSのAmiの作成、LaunchConfigの作成、AutoScalingGroupに紐づくLaunchConfigの入れ替えを行うコマンドラインツールです。
+Packer + Ansibleを使い、自分が足りないと思った機能を埋めるために作成しました。
 
 ## Installation
 
@@ -16,7 +18,67 @@ install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+`build`コマンドを使用します。
+
+```sh
+$ tsudura build example.yml
+```
+
+### 設定ファイル
+
+packerで言う設定を記述するjsonをtsuduraではyamlに記述します。
+[spec/samples/yamls](https://github.com/onigra/tsudura/tree/master/spec/samples/yamls)にテストで使用しているサンプルのyamlがありますので、参考になると思います。
+また、yamlはERBの記法が使用できるようにしてあります。
+
+#### required
+
+- `service`: 扱うリソースの名前空間です。作成されたリソースにprefixとして付与されます。
+- `region`: インスタンスを作成するRegionを指定します。
+- `security_group_id`: インスタンスに設定するSecurityGroupIDを指定します。
+- `subnet_id`: インスタンスに設定するSubnetIDを指定します。
+- `image_id`: インスタンスを作成する際のAmiのIDを指定します。
+- `key_name`: インスタンスを作成する際のKeyPairの名前を指定します。
+- `instance_type`: インスタンスを作成、LaunchConfigを作成する際のInstanceTypeを指定します。
+- `playbook_path`: 実行するAnsiblePlaybookのPathを指定します。
+- `inventory_file`: Ansibleを実行する際のInventoryFileのPathを指定します。
+- `owner`: Amiを作成する際に指定するOwnerのIDを指定します。
+
+#### options
+
+- `vault_password`: AnsibleVaultを使用していた場合、実行する際のVaultPasswordを指定します。
+- `mode`: 後述する実行モードを指定します。
+- `user_data_script`: LaunchConfigを作成する際にUserDataScriptを指定します。
+
+### モードについて
+
+#### NormalMode
+
+デフォルト。何も指定しないとこれになる。
+
+- Amiの作成
+- LaunchConfigの作成
+- AutoScalingGroupの更新
+
+```yaml
+mode: normal
+```
+
+#### PackerMode
+
+- Amiの作成
+
+```yaml
+mode: packer
+```
+
+#### PackerPlusMode
+
+- Amiの作成
+- LaunchConfigの作成
+
+```yaml
+mode: packer_plus
+```
 
 ## Development
 
