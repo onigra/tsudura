@@ -20,19 +20,21 @@ module Tsudura::Aws
     end
 
     def delete
-      unavailable_launch_configurations.each do |launch_configuration_name|
-        autoscaling.delete_launch_configuration(launch_configuration_name: launch_configuration_name)
+      unless unavailable_launch_configurations.empty?
+        unavailable_launch_configurations.each do |launch_configuration_name|
+          autoscaling.delete_launch_configuration(launch_configuration_name: launch_configuration_name)
+        end
       end
     end
   
-    def unavailable_launch_configurations
-      all_launch_configurations - available_launch_configurations
-    end
-  
     private
-  
+
     def autoscaling
       @autoscaling ||= ::Aws::AutoScaling::Client.new(region: @config[:region])
+    end
+
+    def unavailable_launch_configurations
+      @unavailable_launch_configurations ||= all_launch_configurations - available_launch_configurations
     end
 
     def available_launch_configurations
