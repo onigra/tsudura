@@ -10,4 +10,5 @@ inventory_file: "~/.ansible/ec2.py"
 vault_password: <%= ENV["VAULT_PASSWORD"] %>
 instance_type: t2.micro
 user_data_script: "#!/bin/bash -ex\nsu - deploy /home/deploy/startup.sh staging"
+auto_scaling_group_name: tsudura-stg-blue
 owner: <%= ENV["OWNER"] %>

@@ -9,7 +9,7 @@ module Tsudura::Aws
   
     def update
       autoscaling.update_auto_scaling_group(
-        auto_scaling_group_name: "#{@config[:service]}-#{short_env}-group",
+        auto_scaling_group_name: @config[:auto_scaling_group_name],
         launch_configuration_name: "#{@config[:service]}-#{short_env}-#{@timestamp}",
       )
     end
