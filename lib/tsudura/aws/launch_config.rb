@@ -20,23 +20,31 @@ module Tsudura::Aws
     end
 
     def delete
-      autoscaling.delete_launch_configuration(launch_configuration_name: old_launch_config_name)
+      unavailable_launch_configurations.each do |launch_configuration_name|
+        autoscaling.delete_launch_configuration(launch_configuration_name: launch_configuration_name)
+      end
     end
   
-    def old_launch_config_name
-      tmp = []
-
-      autoscaling.describe_launch_configurations.each_page do |i|
-        tmp << i.launch_configurations.select { |item| item.launch_configuration_name =~ /#{@config[:service]}-#{short_env}/ }
-      end
-  
-      tmp.flatten.reject { |obj| obj.launch_configuration_name == @new_launch_config }.map(&:launch_configuration_name).first
+    def unavailable_launch_configurations
+      all_launch_configurations - available_launch_configurations
     end
   
     private
   
     def autoscaling
       @autoscaling ||= ::Aws::AutoScaling::Client.new(region: @config[:region])
+    end
+
+    def available_launch_configurations
+      autoscaling.describe_auto_scaling_groups[:auto_scaling_groups]
+        .select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }
+        .map(&:launch_configuration_name).uniq
+    end
+
+    def all_launch_configurations
+      autoscaling.describe_launch_configurations[:launch_configurations]
+        .select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }
+        .map(&:launch_configuration_name)
     end
   end
 end
