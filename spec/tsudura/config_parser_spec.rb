@@ -24,6 +24,7 @@ describe Tsudura::ConfigParser do
           inventory_file: "~/.ansible/ec2.py",
           vault_password: "password",
           user_data_script: "#!/bin/bash -ex\nsu - deploy /home/deploy/startup.sh staging",
+          auto_scaling_group_name: "tsudura-stg-blue",
           owner: 99999999,
         )
       end
