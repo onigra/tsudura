@@ -48,6 +48,7 @@ packerで言う設定を記述するjsonをtsuduraではyamlに記述します�
 - `vault_password`: AnsibleVaultを使用していた場合、実行する際のVaultPasswordを指定します。
 - `mode`: 後述する実行モードを指定します。
 - `user_data_script`: LaunchConfigを作成する際にUserDataScriptを指定します。
+- `auto_scaling_group_name`: 新しく作成したLaunchConfigを紐づけるAutoScalingGroupを指定します。
 
 ### モードについて
 
