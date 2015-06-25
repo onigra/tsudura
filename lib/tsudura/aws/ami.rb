@@ -15,19 +15,13 @@ module Tsudura::Aws
     end
      
     def deregister
-      ec2.deregister_image(image_id: get_old_image(describe_service_images))
+      unless not_use_images.empty?
+        not_use_images.each do |image_id|
+          ec2.deregister_image(image_id: image_id)
+        end
+      end
     end
 
-    def describe_service_images 
-      ec2.describe_images(owners: ["#{@config[:owner]}"], filters: [ { name: "name", values: ["#{@config[:service]}-#{short_env}*"] }])
-    end
-
-    def get_old_image(images)
-      old_image_id = nil
-      images.each_page { |i| old_image_id = i.images.map(&:image_id).reject { |id| id == @new_image_id }.first }
-      old_image_id
-    end
-  
     private
 
     def create_ami
@@ -51,6 +45,27 @@ module Tsudura::Aws
 
     def ec2
       @ec2 ||= ::Aws::EC2::Client.new(region: @config[:region])
+    end
+
+    def launch_config
+      @launch_config ||= ::Aws::AutoScaling::Client.new(region: @config[:region])
+    end
+
+    def not_use_images
+      @not_use_images ||= all_images - available_images
+    end
+
+    def all_images
+      ec2.describe_images(
+        owners: ["#{@config[:owner]}"],
+        filters: [ { name: "name", values: ["#{@config[:service]}-#{short_env}*"] }]
+      )[:images].map(&:image_id)
+    end
+
+    def available_images
+      launch_config.describe_launch_configurations[:launch_configurations]
+        .select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }
+        .map(&:image_id).uniq
     end
   end
 end
