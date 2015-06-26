@@ -38,8 +38,8 @@ module Tsudura::Runners
   
     def destroy_temp_objects_with_m
       terminate_tmp_ec2_instance_with_m
-      deregister_old_ami_with_m
       delete_old_launch_config_with_m
+      deregister_old_ami_with_m
     end
     
     def terminate_tmp_ec2_instance_with_m
