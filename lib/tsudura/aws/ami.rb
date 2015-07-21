@@ -28,7 +28,7 @@ module Tsudura::Aws
       result = ec2.create_image(name: "#{@config[:service]}-#{short_env}-#{@timestamp}", instance_id: @instance_id)
       result[:image_id]
     end
-  
+
     #
     # stateがavailableになるまで待ち
     #
@@ -56,16 +56,21 @@ module Tsudura::Aws
     end
 
     def all_images
+      tmp = []
+
       ec2.describe_images(
         owners: ["#{@config[:owner]}"],
         filters: [ { name: "name", values: ["#{@config[:service]}-#{short_env}*"] }]
-      )[:images].map(&:image_id)
+      ).each_page { |i| tmp.concat i.images }
+
+      tmp.map(&:image_id)
     end
 
     def available_images
-      launch_config.describe_launch_configurations[:launch_configurations]
-        .select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }
-        .map(&:image_id).uniq
+      tmp = []
+
+      launch_config.describe_launch_configurations.each_page { |i| tmp.concat i.launch_configurations }
+      tmp.select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }.map(&:image_id).uniq
     end
   end
 end
