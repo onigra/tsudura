@@ -38,15 +38,17 @@ module Tsudura::Aws
     end
 
     def available_launch_configurations
-      autoscaling.describe_auto_scaling_groups[:auto_scaling_groups]
-        .select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }
-        .map(&:launch_configuration_name).uniq
+      tmp = []
+
+      autoscaling.describe_auto_scaling_groups.each_page { |i| tmp.concat i.launch_configurations }
+      tmp.select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }.map(&:launch_configuration_name).uniq
     end
 
     def all_launch_configurations
-      autoscaling.describe_launch_configurations[:launch_configurations]
-        .select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }
-        .map(&:launch_configuration_name)
+      tmp = []
+
+      autoscaling.describe_launch_configurations.each_page { |i| tmp.concat i.launch_configurations }
+      tmp.select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }.map(&:launch_configuration_name)
     end
   end
 end
