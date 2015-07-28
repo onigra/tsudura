@@ -81,6 +81,15 @@ mode: packer
 mode: packer_plus
 ```
 
+#### ProvisionerTestMode
+
+- プロビジョニングの実行のみ行う
+- インスタンスをterminateしない
+
+```yaml
+mode: provisioner_test
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment. Run `bundle exec tsudura` to use the code located in this directory, ignoring other installed copies of this gem.
