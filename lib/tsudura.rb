@@ -25,4 +25,6 @@ require "tsudura/aws/ami"
 require "tsudura/aws/auto_scale"
 require "tsudura/aws/launch_config"
 require "tsudura/aws/launch_instance"
-require "tsudura/provisioner/ansible"
+
+require "tsudura/provisioner/ansible/command"
+require "tsudura/provisioner/ansible/command_generator"
