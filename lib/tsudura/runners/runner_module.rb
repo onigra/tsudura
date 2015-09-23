@@ -9,7 +9,7 @@ module Tsudura::Runners
     end
   
     def provision
-      Tsudura::Provisioner::Ansible.new(@config).provision!
+      Tsudura::Provisioner::Ansible::Command.exec @config
     end
   
     def create_ami
