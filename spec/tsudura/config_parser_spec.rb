@@ -30,4 +30,10 @@ describe Tsudura::ConfigParser do
       end
     end
   end
+
+  describe "#check" do
+    let(:config) { described_class.new("#{APP_ROOT}/spec/samples/yamls/normal.yml") }
+    subject { config.check }
+    it { should be_truthy }
+  end
 end
