@@ -30,3 +30,4 @@ require "tsudura/provisioner/ansible/command"
 require "tsudura/provisioner/ansible/command_generator"
 
 require "tsudura/config_checker/base"
+require "tsudura/config_checker/common"
