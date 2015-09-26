@@ -8,5 +8,9 @@ module Tsudura
     def attributes
       @config.symbolize_keys
     end
+
+    def check
+      true
+    end
   end
 end
