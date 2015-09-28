@@ -1,4 +1,4 @@
 module Tsudura::ConfigChecker
-  class Common < Base
+  class Normal < Base
   end
 end
