@@ -7,16 +7,15 @@ module Tsudura::Aws
       @config = config
       @timestamp = timestamp
     end
+
+    def options
+      option = base_option
+      option[:iam_instance_profile] = @config[:iam_instance_profile] if @config[:iam_instance_profile]
+      option
+    end
   
     def create
-      @new_launch_config = autoscaling.create_launch_configuration(
-        image_id: @image_id,
-        key_name: @config[:key_name],
-        user_data: Base64.encode64(@config[:user_data_script]),
-        instance_type: @config[:instance_type],
-        security_groups: [@config[:security_group_id]],
-        launch_configuration_name: "#{@config[:service]}-#{short_env}-#{@timestamp}",
-      )
+      @new_launch_config = autoscaling.create_launch_configuration(options)
     end
 
     def delete
@@ -49,6 +48,17 @@ module Tsudura::Aws
 
       autoscaling.describe_launch_configurations.each_page { |i| tmp.concat i.launch_configurations }
       tmp.select { |i| i[:launch_configuration_name] =~ /#{@config[:service]}-#{short_env}/ }.map(&:launch_configuration_name)
+    end
+
+    def base_option
+      {
+        image_id: @image_id,
+        key_name: @config[:key_name],
+        user_data: Base64.encode64(@config[:user_data_script]),
+        instance_type: @config[:instance_type],
+        security_groups: [@config[:security_group_id]],
+        launch_configuration_name: "#{@config[:service]}-#{short_env}-#{@timestamp}",
+      }
     end
   end
 end
