@@ -26,7 +26,7 @@ describe Tsudura::Aws::LaunchConfig do
     end
 
     context "iam_instance_profile無し" do
-      let(:config) { Tsudura::ConfigParser.new("#{APP_ROOT}/spec/samples/yamls/packer_plus.yml").attributes }
+      let(:config) { Tsudura::ConfigParser.new("#{APP_ROOT}/spec/samples/yamls/has_not_iam_instance_profile.yml").attributes }
 
       subject { described_class.new(image_id, config, timestamp).options }
 
