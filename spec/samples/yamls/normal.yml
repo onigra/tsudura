@@ -5,6 +5,7 @@ security_group_id: sg-2f1e854a
 subnet_id: subnet-cd985794
 image_id: ami-cbf90ecb
 key_name: tsudura_sample
+iam_instance_profile: tsudura_role
 playbook_path: "spec/samples/ansible_playbook/staging.yml"
 inventory_file: "~/.ansible/ec2.py"
 vault_password: <%= ENV["VAULT_PASSWORD"] %>
