@@ -26,6 +26,7 @@ describe Tsudura::ConfigParser do
           user_data_script: "#!/bin/bash -ex\nsu - deploy /home/deploy/startup.sh staging",
           auto_scaling_group_name: "tsudura-stg-blue",
           owner: 99999999,
+          iam_instance_profile: "tsudura_role",
         )
       end
     end
