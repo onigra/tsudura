@@ -10,7 +10,7 @@ describe Tsudura::Provisioner::Executer do
 
     context "exit status 2" do
       it "output to stdout" do
-        expect { described_class.run "ls ..." rescue nil }.to output(/ls: cannot access '...': No such file or directory/).to_stdout
+        expect { described_class.run "ls ..." rescue nil }.to output(/No such file or directory/).to_stdout
       end
 
       it "raise ProvisioningFailed error" do
