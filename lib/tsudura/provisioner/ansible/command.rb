@@ -5,7 +5,7 @@ module Tsudura::Provisioner
         Open3.popen3(CommandGenerator.new(config).generate) do |i, o, e, w|
           o.each { |line| puts line }
           e.each { |line| puts line }
-          raise StandardError unless w.value.success?
+          raise ::Tsudura::Errors::ProvisioningFailed unless w.value.success?
         end
       end
     end

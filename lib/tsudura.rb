@@ -19,6 +19,7 @@ require "tsudura/runners/provisioner_test_runner"
 require "tsudura/runner"
 require "tsudura/cli"
 require "tsudura/version"
+require "tsudura/errors/provisioning_failed"
 
 require "tsudura/aws/utils"
 require "tsudura/aws/ami"
