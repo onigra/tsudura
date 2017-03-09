@@ -2,9 +2,7 @@ module Tsudura::Provisioner
   module Ansible
     class Command
       def self.exec(config)
-        Open3.popen3(CommandGenerator.new(config).generate) do |i, o, e, w|
-          o.each do |line| puts line end
-        end
+        Tsudura::Provisioner::Executer.run CommandGenerator.new(config).generate
       end
     end
   end

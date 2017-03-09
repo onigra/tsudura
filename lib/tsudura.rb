@@ -19,6 +19,7 @@ require "tsudura/runners/provisioner_test_runner"
 require "tsudura/runner"
 require "tsudura/cli"
 require "tsudura/version"
+require "tsudura/errors/provisioning_failed"
 
 require "tsudura/aws/utils"
 require "tsudura/aws/ami"
@@ -28,3 +29,4 @@ require "tsudura/aws/launch_instance"
 
 require "tsudura/provisioner/ansible/command"
 require "tsudura/provisioner/ansible/command_generator"
+require "tsudura/provisioner/executer"
