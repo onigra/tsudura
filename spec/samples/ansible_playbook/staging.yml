@@ -1,7 +1,7 @@
 ---
 - hosts:
-  - tag_Name_tsudura-ami
-  sudo: yes
+    - tag_Name_tsudura_ami
+  become: yes
   vars_files:
     - vault_var.yml
   roles:

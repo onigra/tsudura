@@ -3,13 +3,17 @@ environment: staging
 region: ap-northeast-1
 security_group_id: sg-2f1e854a
 subnet_id: subnet-cd985794
-image_id: ami-cbf90ecb
+image_id: ami-56d4ad31
 key_name: tsudura_sample
 iam_instance_profile: tsudura_role
 playbook_path: "spec/samples/ansible_playbook/staging.yml"
 inventory_file: "~/.ansible/ec2.py"
-vault_password: <%= ENV["VAULT_PASSWORD"] %>
+vault_password: <%= ENV["VAULT_PASSWORD"] || 'tsudura' %>
 instance_type: t2.micro
-user_data_script: "#!/bin/bash -ex\nsu - deploy /home/deploy/startup.sh staging"
+user_data_script: >
+  #cloud-config
+
+  runcmd:
+    - su - deploy /home/deploy/startup.sh staging
 auto_scaling_group_name: tsudura-stg-blue
 owner: <%= ENV["OWNER"] %>
